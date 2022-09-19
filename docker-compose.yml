@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:latest
+    env_file:
+      - ./.env
+    ports:
+      - 3000:5432
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/fullstack_project?schema=public
+    ports:
+      - 4000:4000
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+    healthcheck:
+      test: psql -U $POSTGRES_USER $POSTGRES_DB || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 5m
+
+volumes:
+  dbdata:
