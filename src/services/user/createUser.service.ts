@@ -8,19 +8,11 @@ const createUserService = async (name: string, email: string, tel: string) => {
       name: name,
       email: email,
       tel: tel,
-      account_created: new Date(),
+      accountCreated: new Date(),
     }
   })
 
-  const contact = await prisma.contact.create({
-    data: {
-      name : user.name,
-      emails : user.email,
-      tel : user.tel,
-      ownerID : user.id
-    }
-  })
-
+ 
 
   return user
 

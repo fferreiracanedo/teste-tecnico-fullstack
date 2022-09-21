@@ -6,7 +6,10 @@
   "author": "Mateus Ferreira Canedo <mateusferreiracanedo@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -r tsconfig-paths/register --transpile-only --ignore node_modules src/server.ts"
+    "dev": "nodemon -r tsconfig-paths/register --transpile-only --ignore node_modules src/server.ts",
+    "migrate": "prisma migrate dev",
+    "build": "tsc",
+    "start": "node dist/src/server.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
