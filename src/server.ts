@@ -1,12 +1,13 @@
 import app from './app'
 import { prisma } from "./prisma/script"
 
+const port = process.env.PORT || 4000
 
 async function bootStrap() {
   await prisma.$connect()
 
-  app.listen(4000, () => {
-    console.log("Server is Running on Port 4000 ")
+  app.listen(port, () => {
+    console.log(`Server running at por ${port}`)
   })
 }
 
