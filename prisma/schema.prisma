@@ -8,22 +8,23 @@ datasource db {
 }
 
 model User {
-  id              Int       @id @default(autoincrement())
-  name            String    @unique
-  email           String    @db.VarChar()
+  id              String   @id @unique @default(uuid())
+  name            String    @db.VarChar()
+  email           String    @unique @db.VarChar()
+  password        String    @db.VarChar()
   tel             String    @db.VarChar()
   accountCreated DateTime  @default(now()) @map("account_created")
-  contacts        Contact[] @relation(name:"userContact") 
+  contacts        Contact[] @relation(name:"userContact" ) 
   @@map("user")
   
 }
 
 model Contact {
-  id      Int    @id @default(autoincrement())
+  id      String    @id @unique @default(uuid())
   name    String @db.VarChar()
   emails  String @db.VarChar()
   tel     String @db.VarChar()
-  ownerId Int  @map("owner_id")
-  owner   User   @relation(name: "userContact",fields: [ownerId], references: [id])
+  ownerId String  @map("owner_id")
+  owner   User   @relation(name: "userContact",fields: [ownerId], references: [id] )
   @@map("contact")
 }

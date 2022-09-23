@@ -1,24 +1,9 @@
-/*
-  Warnings:
-
-  - You are about to drop the `Contact` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE "Contact" DROP CONSTRAINT "Contact_ownerID_fkey";
-
--- DropTable
-DROP TABLE "Contact";
-
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "user" (
     "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
+    "name" VARCHAR NOT NULL,
     "email" VARCHAR NOT NULL,
+    "password" VARCHAR NOT NULL,
     "tel" VARCHAR NOT NULL,
     "account_created" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -37,7 +22,7 @@ CREATE TABLE "contact" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "user_name_key" ON "user"("name");
+CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- AddForeignKey
 ALTER TABLE "contact" ADD CONSTRAINT "contact_owner_id_fkey" FOREIGN KEY ("owner_id") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
