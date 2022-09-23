@@ -6,7 +6,7 @@ const deleteUserController = async (req: Request, res: Response) => {
 
   const { userId } = req.params
 
-  await deleteUserService((userId))
+  await deleteUserService(userId)
 
 
   return res.status(204).json({ message: "User Deleted" })

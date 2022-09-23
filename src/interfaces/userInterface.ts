@@ -10,3 +10,10 @@ export interface Ilogin {
   email: string,
   password: string,
 }
+
+export interface IuserUpdate {
+  name?: string,
+  email?: string,
+  password?: string,
+  tel?: string,
+}

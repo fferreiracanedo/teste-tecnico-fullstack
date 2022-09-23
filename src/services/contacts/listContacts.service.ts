@@ -5,7 +5,7 @@ const listContactsService = async () => {
   const contactList = await prisma.contact.findMany({
     select: {
       id: true, name: true, emails: true, tel
-        : true, owner: true, ownerId: true,
+        : true, owner: { select: { id: true, name: true } }
     }
   })
 

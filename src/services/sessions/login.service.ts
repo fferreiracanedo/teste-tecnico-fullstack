@@ -2,7 +2,7 @@ import { prisma } from "../../prisma/script";
 import jwt from "jsonwebtoken";
 import { Ilogin } from "../../interfaces/userInterface";
 import { AppError } from "../../errors/appError";
-import * as bcrypt from 'bcrypt'
+import { compare } from 'bcrypt'
 
 
 const loginService = async (data: Ilogin) => {
@@ -14,9 +14,15 @@ const loginService = async (data: Ilogin) => {
     throw new AppError("User don't exists")
   }
 
-  if (!bcrypt.compareSync(data.password, userExists.password)) {
+  const mathPass = await compare(data.password, userExists.password)
+
+
+  if (!mathPass) {
+
     throw new AppError("Password not match", 401)
+
   }
+
 
   const token = jwt.sign({ id: userExists.id }, process.env.SECRET_KEY as string, { expiresIn: "24h" })
 

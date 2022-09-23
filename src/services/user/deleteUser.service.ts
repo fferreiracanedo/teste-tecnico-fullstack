@@ -18,13 +18,13 @@ const deleteUserService = async (userId: string) => {
   }
 
 
-  const deletedUser = await prisma.user.delete({
+  await prisma.user.delete({
     where: {
       id: userId,
     },
   });
 
 
-  return
+  return true
 }
 export default deleteUserService
