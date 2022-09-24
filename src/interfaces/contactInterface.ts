@@ -4,5 +4,11 @@ export interface IcontactRequest {
   name: string,
   emails: string,
   tel: string,
-  ownerId: number
+  ownerId: string
+}
+
+export interface IcontactUpdate {
+  name?: string,
+  emails?: string,
+  tel?: string,
 }

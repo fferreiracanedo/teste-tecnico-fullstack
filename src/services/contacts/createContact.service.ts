@@ -7,7 +7,7 @@ const createContactService = async (data: IcontactRequest) => {
 
 
 
-  const contactEmail = await prisma.contact.findMany({ where: { emails: data.emails } })
+  const contactEmail = await prisma.contact.findFirst({ where: { emails: data.emails } })
 
   if (contactEmail) {
     throw new AppError("Email Already Exists")
